@@ -4,11 +4,11 @@
     contain the root `toctree` directive.
 
 Welcome to Rankboost+'s documentation!
-=====================================
+======================================
 
 ..  toctree::
     :maxdepth: 3
-    :caption: 
+    :caption: Rankboost+ is a variant of RankBoost designed to minimize a different upper bound on rank loss 
 
     source/rankboost.rst
 
