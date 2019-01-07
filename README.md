@@ -1,8 +1,11 @@
 # rankboostplus
 Implementations of various ranking-by-boosting algorithms including Rankboost+.
 
+## Installation
+NumPy, SciPy, and Python 3.5 (as type hinting is used) are required for this project. To install, run `python setup.py install` from the base directory.
+
 ## Usage
-To use these algorithms, NumPy, SciPy, and Python 3.6 are required. A simple example can be seen below, where `y.shape = (M, 2)`, and `x.shape = [N,D]`, and each `y[i,0], y[i,1]` is a critical pair with `x[y[i, 0]]` ranked higher than `x[y[i,1]]`. 
+A simple example can be seen below, where `y.shape = (M, 2)`, and `x.shape = [N,D]`, and each `y[i,0], y[i,1]` is a critical pair with `x[y[i, 0]]` ranked higher than `x[y[i,1]]`. 
 
 ```python
 r = RBD(max_iter)
