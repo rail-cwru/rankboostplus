@@ -1,0 +1,315 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>rankboost package &#8212; Rankboost+ 0.0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="rankboost.algorithms" href="rankboost.algorithms.html" />
+    <link rel="prev" title="Welcome to Rankboost+’s documentation!" href="../index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="rankboost-package">
+<h1>rankboost package<a class="headerlink" href="#rankboost-package" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="rankboost.algorithms.html">rankboost.algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rankboost.algorithms.rbc.html">rankboost.algorithms.rbc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rankboost.algorithms.rbd.html">rankboost.algorithms.rbd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rankboost.algorithms.rbp.html">rankboost.algorithms.rbp</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="module-rankboost.base_ranking">
+<span id="rankboost-base-ranking"></span><h2>rankboost.base_ranking<a class="headerlink" href="#module-rankboost.base_ranking" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rankboost.base_ranking.RankBoost">
+<em class="property">class </em><code class="descclassname">rankboost.base_ranking.</code><code class="descname">RankBoost</code><span class="sig-paren">(</span><em>niter: int = 10</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rankboost/base_ranking.html#RankBoost"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rankboost.base_ranking.RankBoost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Base class for all rankers.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>niter</strong> – upper bound on number of iterations to run the algorithm for</td>
+</tr>
+</tbody>
+</table>
+<dl class="staticmethod">
+<dt id="rankboost.base_ranking.RankBoost.create_rankers">
+<em class="property">static </em><code class="descname">create_rankers</code><span class="sig-paren">(</span><em>X: numpy.ndarray</em>, <em>y: numpy.ndarray</em><span class="sig-paren">)</span> &#x2192; Tuple[List[rankboost.base_ranking.StumpRanker], numpy.ndarray]<a class="reference internal" href="../_modules/rankboost/base_ranking.html#RankBoost.create_rankers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rankboost.base_ranking.RankBoost.create_rankers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a set of Decision stump rankers. If a single feature has more than 255 levels,
+only 255 of the possible thresholds are chosen for rankers. Inputs must be of the form
+output by normalize_dict.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>X</strong> – </li>
+<li><strong>y</strong> – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="rankboost.base_ranking.RankBoost.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X: Union[numpy.ndarray, Dict[K, List[float]]], y: Union[numpy.ndarray, List[Tuple[K, K]]]</em><span class="sig-paren">)</span> &#x2192; Any<a class="reference internal" href="../_modules/rankboost/base_ranking.html#RankBoost.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rankboost.base_ranking.RankBoost.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>This should take either take ndarrays of the form that <cite>normalize_dict</cite>
+outputs, or dictionaries to be input to <cite>normalize_dict</cite>, and train the model</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rankboost.base_ranking.RankBoost.from_signature">
+<em class="property">classmethod </em><code class="descname">from_signature</code><span class="sig-paren">(</span><em>alphas: List[float], rankers_signatures: List[Tuple[int, float]]</em><span class="sig-paren">)</span> &#x2192; rankboost.base_ranking.RankBoost<a class="reference internal" href="../_modules/rankboost/base_ranking.html#RankBoost.from_signature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rankboost.base_ranking.RankBoost.from_signature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load a classifier from its signature</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>alphas</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>]</em>) – Weights</li>
+<li><strong>rankers_signatures</strong> (<em>List</em><em>[</em><em>Tuple</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a><em>]</em><em>]</em>) – List of tuples representing StumpRankers</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A RankBoost object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rankboost.base_ranking.RankBoost.normalize_dict">
+<em class="property">static </em><code class="descname">normalize_dict</code><span class="sig-paren">(</span><em>X: Dict[K, List[float]], y: List[Tuple[K, K]]</em><span class="sig-paren">)</span> &#x2192; Tuple[numpy.ndarray, numpy.ndarray]<a class="reference internal" href="../_modules/rankboost/base_ranking.html#RankBoost.normalize_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rankboost.base_ranking.RankBoost.normalize_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts data from dictionary and list to ndarrays.
+X is of the form {k1: [feature1, feature2, …], k2: [feature1, feature2, …], …}
+y is a dictionary of tuples of keys of x, where y[ix][0] is ranked higher than y[ix][1]
+This will convert X into a ndarray xp, and y into an array that indexes X, so that
+np.array([X[p0] for p0, _ in y]) == X_new[y_new[:, 0]] and respectively with y[:, 1].</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>X</strong> – </li>
+<li><strong>y</strong> – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="rankboost.base_ranking.RankBoost.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X: Union[numpy.ndarray, Dict[K, List[float]]], y: Union[numpy.ndarray, List[Tuple[K, K]], None] = None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rankboost/base_ranking.html#RankBoost.predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rankboost.base_ranking.RankBoost.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predict based on <cite>self.classifiers</cite> and <cite>self.alphas</cite>. Takes the same input types as <cite>fit</cite>.
+Outputs instance predictions if y is None, and otherwise outputs pairwise predictions.
+:param X:
+:param y:
+:return: np.ndarray of shape (len(X),) if y is None, or (len(y), ) if y is not None.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rankboost.base_ranking.RankBoost.predict_cumulative">
+<code class="descname">predict_cumulative</code><span class="sig-paren">(</span><em>X: Union[numpy.ndarray, Dict[K, List[float]]], y: Union[numpy.ndarray, List[Tuple[K, K]], None] = None, max_iter: Optional[int] = None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rankboost/base_ranking.html#RankBoost.predict_cumulative"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rankboost.base_ranking.RankBoost.predict_cumulative" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes the same inputs as <cite>predict</cite>, but outputs cumulative predictions up to max_iter.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>X</strong> – </li>
+<li><strong>y</strong> – </li>
+<li><strong>max_iter</strong> – last iteration to make predictions for. Defaults to <cite>len(self.classifiers)</cite>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">np.ndarray of shape (len(X), max_iter) if y is None, or (len(y), max_iter) if y is not None.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="rankboost.base_ranking.RankBoost.signature">
+<code class="descname">signature</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict[str, List[T]]<a class="reference internal" href="../_modules/rankboost/base_ranking.html#RankBoost.signature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rankboost.base_ranking.RankBoost.signature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a signature that can be used to make predictions at every iteration</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="rankboost.base_ranking.StumpRanker">
+<em class="property">class </em><code class="descclassname">rankboost.base_ranking.</code><code class="descname">StumpRanker</code><span class="sig-paren">(</span><em>feature</em>, <em>threshold</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rankboost/base_ranking.html#StumpRanker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rankboost.base_ranking.StumpRanker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></p>
+<dl class="attribute">
+<dt id="rankboost.base_ranking.StumpRanker.feature">
+<code class="descname">feature</code><a class="headerlink" href="#rankboost.base_ranking.StumpRanker.feature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rankboost.base_ranking.StumpRanker.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X: numpy.ndarray</em>, <em>y: Optional[numpy.ndarray] = None</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="../_modules/rankboost/base_ranking.html#StumpRanker.predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rankboost.base_ranking.StumpRanker.predict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="rankboost.base_ranking.StumpRanker.threshold">
+<code class="descname">threshold</code><a class="headerlink" href="#rankboost.base_ranking.StumpRanker.threshold" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="rankboost.base_ranking.UnionFind">
+<em class="property">class </em><code class="descclassname">rankboost.base_ranking.</code><code class="descname">UnionFind</code><span class="sig-paren">(</span><em>val=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rankboost/base_ranking.html#UnionFind"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rankboost.base_ranking.UnionFind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Basic Union find class</p>
+<dl class="method">
+<dt id="rankboost.base_ranking.UnionFind.find">
+<code class="descname">find</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rankboost/base_ranking.html#UnionFind.find"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rankboost.base_ranking.UnionFind.find" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rankboost.base_ranking.UnionFind.union">
+<code class="descname">union</code><span class="sig-paren">(</span><em>y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rankboost/base_ranking.html#UnionFind.union"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rankboost.base_ranking.UnionFind.union" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="rankboost.base_ranking.get_duplicates_mask">
+<code class="descclassname">rankboost.base_ranking.</code><code class="descname">get_duplicates_mask</code><span class="sig-paren">(</span><em>rankers: numpy.ndarray</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="../_modules/rankboost/base_ranking.html#get_duplicates_mask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rankboost.base_ranking.get_duplicates_mask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a list of indices such that rankers[:, mask] contains
+no duplicate columns, and contains the same number of unique
+columns as before applying this function</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>rankers</strong> (<em>np.ndarray</em>) – A MxN ndarray</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">np.ndarray[<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Rankboost+</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Rankboost+ is a variant of RankBoost designed to minimize a different upper bound on rank loss</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">rankboost package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rankboost.algorithms.html">rankboost.algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rankboost.base_ranking">rankboost.base_ranking</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../index.html" title="previous chapter">Welcome to Rankboost+’s documentation!</a></li>
+      <li>Next: <a href="rankboost.algorithms.html" title="next chapter">rankboost.algorithms</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Harold Connamacher, Nikil Pancha Soumya Ray.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/source/rankboost.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
