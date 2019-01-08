@@ -1,5 +1,5 @@
 # rankboostplus
-Implementations of various ranking-by-boosting algorithms including Rankboost+.
+Implementations of various ranking-by-boosting algorithms including Rankboost+. Documentation can be found [here](https://rail-cwru.github.io/rankboostplus/).
 
 ## Installation
 NumPy, SciPy, and Python 3.5 (as type hinting is used) are required for this project. To install, run `python setup.py install` from the base directory.
